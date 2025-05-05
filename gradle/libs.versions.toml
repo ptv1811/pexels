@@ -1,26 +1,85 @@
 [versions]
-agp = "8.9.2"
-kotlin = "2.0.21"
+kspVersion = "4.14.2"
+targetSdk = "35"
+jvmBytecode = "17"
+
+activity = "1.10.1"
+agp = "8.8.2"
+androidxArchCore = "2.2.0"
+appcompat = "1.7.0"
+constraintlayout = "2.2.1"
 coreKtx = "1.16.0"
+coroutines = "1.6.0"
+datastore = "1.1.1"
+espressoCore = "3.6.1"
+glide = "4.12.0"
+hiltCore = "2.56"
 junit = "4.13.2"
 junitVersion = "1.2.1"
-espressoCore = "3.6.1"
-appcompat = "1.7.0"
-material = "1.10.0"
-activity = "1.10.1"
-constraintlayout = "2.1.4"
+kotlin = "2.1.20"
+ksp = "2.1.20-1.0.32"
+lifecycle = "2.8.1"
+material = "1.12.0"
+mockito = "5.17.0"
+mockito-kotlin = "5.4.0"
+moshi = "1.15.2"
+okhttp = "4.7.2"
+paging = "3.1.1"
+recyclerView = "1.3.2"
+retrofit = "2.9.0"
+robolectric = "4.14.1"
+room = "2.6.1"
+turbine = "1.2.0"
+sandwich = "2.1.1"
+shimmerVersion = "0.5.0"
+coreKtxVersion = "1.6.1"
 
 [libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+android-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltCore" }
+android-lifecycle-savedstate = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-savedstate", version.ref = "lifecycle" }
+android-room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-arch-core = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidxArchCore" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-lifecyle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
+coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+facebook-shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmerVersion" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+hilt-android-processor = { group = "com.google.dagger", name = "dagger-android-processor", version.ref = "hiltCore" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltCore" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+glide-ksp = { module = "com.github.bumptech.glide:ksp", version.ref = "kspVersion" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockito-kotlin" }
+moshi = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
+moshi-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+okhttp-mockserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttp" }
+paging = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging" }
+recyclerView = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerView" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+sandwich = { group = "com.github.skydoves", name = "sandwich-retrofit", version.ref = "sandwich" }
+core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtxVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltCore" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
