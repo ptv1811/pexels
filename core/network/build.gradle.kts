@@ -2,13 +2,22 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.secrets)
 }
 
 android {
     namespace = "com.vanluong.network"
+    buildFeatures {
+        buildConfig = true
+    }
+}
+
+secrets {
+    propertiesFileName = "secrets.properties"
 }
 
 dependencies {
+    api(project(":core:model"))
 
     // network
     implementation(libs.retrofit)
