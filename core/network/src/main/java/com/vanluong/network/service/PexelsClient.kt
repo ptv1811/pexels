@@ -1,6 +1,7 @@
 package com.vanluong.network.service
 
 import com.vanluong.network.model.NetworkPhoto
+import com.vanluong.network.model.NetworkSearchResult
 import javax.inject.Inject
 
 /**
@@ -16,6 +17,6 @@ class PexelsClient @Inject constructor(
      * @param perPage The number of photos to return per page. Default is 15.
      * @return A List containing a list of [NetworkPhoto] objects.
      */
-    suspend fun searchImages(query: String, perPage: Int = 15): List<NetworkPhoto> =
+    suspend fun searchImages(query: String, perPage: Int = 15): Result<NetworkSearchResult> =
         pexelsService.searchImage(query, perPage)
 }

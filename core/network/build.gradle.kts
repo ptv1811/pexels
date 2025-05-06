@@ -18,6 +18,7 @@ secrets {
 
 dependencies {
     api(project(":core:model"))
+    testImplementation(project(":core:testing"))
 
     // network
     implementation(libs.retrofit)
