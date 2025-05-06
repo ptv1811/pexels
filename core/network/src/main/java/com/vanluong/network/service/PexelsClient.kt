@@ -18,6 +18,10 @@ class PexelsClient @Inject constructor(
      * @param perPage The number of photos to return per page. Default is 15.
      * @return A List containing a list of [NetworkPhoto] objects.
      */
-    suspend fun searchImages(query: String, perPage: Int = 15): Resource<NetworkSearchResult> =
-        pexelsService.searchImage(query, perPage)
+    suspend fun searchImages(
+        query: String,
+        page: Int,
+        perPage: Int = 15
+    ): Resource<NetworkSearchResult> =
+        pexelsService.searchImage(query, page, perPage)
 }

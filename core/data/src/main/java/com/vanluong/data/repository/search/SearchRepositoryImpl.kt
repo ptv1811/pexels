@@ -6,6 +6,7 @@ import com.vanluong.model.Resource
 import com.vanluong.model.Photo
 import com.vanluong.model.exception.EmptyPhotoException
 import com.vanluong.network.model.toModel
+import com.vanluong.network.service.PexelsClient
 import com.vanluong.network.service.PexelsService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +20,7 @@ import kotlin.time.Clock
  * on 06,May,2025
  */
 class SearchRepositoryImpl @Inject constructor(
-    private val pexelsService: PexelsService,
+    private val pexelsClient: PexelsClient,
     private val pexelsDao: RecentSearchQueryDao,
 ) : SearchRepository {
     override suspend fun searchPhotos(
@@ -35,7 +36,7 @@ class SearchRepositoryImpl @Inject constructor(
                 )
             )
 
-            when (val response = pexelsService.searchImage(query, page, perPage)) {
+            when (val response = pexelsClient.searchImages(query, page, perPage)) {
                 is Resource.Success -> {
                     val photos = response.body.photos.map { it.toModel() }
                     if (photos.isEmpty()) {
