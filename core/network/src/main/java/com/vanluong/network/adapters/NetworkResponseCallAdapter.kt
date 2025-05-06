@@ -1,6 +1,6 @@
 package com.vanluong.network.adapters
 
-import com.vanluong.model.NetworkResponse
+import com.vanluong.model.Resource
 import kotlinx.coroutines.CoroutineScope
 import retrofit2.Call
 import retrofit2.CallAdapter
@@ -13,11 +13,11 @@ import java.lang.reflect.Type
 class NetworkResponseAdapter<T : Any>(
     private val responseType: Type,
     private val coroutineScope: CoroutineScope
-) : CallAdapter<T, Call<NetworkResponse<T>>> {
+) : CallAdapter<T, Call<Resource<T>>> {
 
     override fun responseType(): Type = responseType
 
-    override fun adapt(call: Call<T>): Call<NetworkResponse<T>> {
+    override fun adapt(call: Call<T>): Call<Resource<T>> {
         return NetworkResponseCall(call, coroutineScope)
     }
 }

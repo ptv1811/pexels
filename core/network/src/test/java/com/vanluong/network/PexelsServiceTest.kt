@@ -1,6 +1,6 @@
 package com.vanluong.network
 
-import com.vanluong.model.NetworkResponse
+import com.vanluong.model.Resource
 import com.vanluong.network.service.PexelsService
 import junit.framework.TestCase.assertNotNull
 import junit.framework.TestCase.fail
@@ -29,7 +29,7 @@ class PexelsServiceTest : ApiAbstract<PexelsService>() {
     fun fetchPexelsPhotoListFromNetworkTest() = runTest {
         enqueueResponse("/PhotoListResponse.json")
         when (val response = service.searchImage("nature", 3)) {
-            is NetworkResponse.Success -> {
+            is Resource.Success -> {
                 val networkResult = response.body
                 assertNotNull(networkResult)
 
@@ -53,11 +53,11 @@ class PexelsServiceTest : ApiAbstract<PexelsService>() {
                 )
             }
 
-            is NetworkResponse.ServerError -> {
+            is Resource.ServerError -> {
                 fail("Expected success but got server error: ${response.message}")
             }
 
-            is NetworkResponse.NetworkError -> {
+            is Resource.DataError -> {
                 fail("Expected success but got network error: ${response.error.message}")
             }
         }

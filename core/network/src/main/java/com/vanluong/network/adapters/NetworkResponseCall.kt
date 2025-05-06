@@ -1,6 +1,6 @@
 package com.vanluong.network.adapters
 
-import com.vanluong.model.NetworkResponse
+import com.vanluong.model.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -18,37 +18,37 @@ import retrofit2.awaitResponse
 class NetworkResponseCall<T : Any>(
     private val delegate: Call<T>,
     private val coroutineScope: CoroutineScope
-) : Call<NetworkResponse<T>> {
+) : Call<Resource<T>> {
 
-    override fun enqueue(callback: Callback<NetworkResponse<T>>) {
+    override fun enqueue(callback: Callback<Resource<T>>) {
         coroutineScope.launch {
             try {
                 val response = delegate.awaitResponse()
                 val result = if (response.isSuccessful) {
-                    NetworkResponse.Success(response.body()!!)
+                    Resource.Success(response.body()!!)
                 } else {
-                    NetworkResponse.ServerError(response.code(), response.message())
+                    Resource.ServerError(response.code(), response.message())
                 }
                 callback.onResponse(this@NetworkResponseCall, Response.success(result))
 
             } catch (e: Exception) {
-                val result = NetworkResponse.NetworkError(e)
+                val result = Resource.DataError(e)
                 callback.onResponse(this@NetworkResponseCall, Response.success(result))
             }
         }
     }
 
-    override fun execute(): Response<NetworkResponse<T>> =
+    override fun execute(): Response<Resource<T>> =
         runBlocking(coroutineScope.coroutineContext) {
             try {
                 val response = delegate.execute()
                 if (response.isSuccessful) {
                     val body = response.body()
                     if (body != null) {
-                        Response.success(NetworkResponse.Success(body))
+                        Response.success(Resource.Success(body))
                     } else {
                         Response.success(
-                            NetworkResponse.ServerError(
+                            Resource.ServerError(
                                 response.code(),
                                 "Empty response body"
                             )
@@ -56,18 +56,18 @@ class NetworkResponseCall<T : Any>(
                     }
                 } else {
                     Response.success(
-                        NetworkResponse.ServerError(
+                        Resource.ServerError(
                             response.code(),
                             response.message()
                         )
                     )
                 }
             } catch (e: Exception) {
-                Response.success(NetworkResponse.NetworkError(e))
+                Response.success(Resource.DataError(e))
             }
         }
 
-    override fun clone(): Call<NetworkResponse<T>> =
+    override fun clone(): Call<Resource<T>> =
         NetworkResponseCall(delegate.clone(), coroutineScope)
 
     override fun request(): Request = delegate.request()

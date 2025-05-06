@@ -1,6 +1,6 @@
 package com.vanluong.network.service
 
-import com.vanluong.model.NetworkResponse
+import com.vanluong.model.Resource
 import com.vanluong.network.model.NetworkSearchResult
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -18,6 +18,7 @@ interface PexelsService {
     @GET("search/{query}")
     suspend fun searchImage(
         @Path("query") query: String,
+        @Query("page") page: Int,
         @Query("per_page") perPage: Int
-    ): NetworkResponse<NetworkSearchResult>
+    ): Resource<NetworkSearchResult>
 }
