@@ -1,6 +1,6 @@
 package com.vanluong.network.adapters
 
-import com.vanluong.model.NetworkResponse
+import com.vanluong.model.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import retrofit2.Call
@@ -27,7 +27,7 @@ class NetworkResponseCallFactory private constructor(
         }
 
         val callType = getParameterUpperBound(0, returnType as ParameterizedType)
-        if (getRawType(callType) != NetworkResponse::class.java) {
+        if (getRawType(callType) != Resource::class.java) {
             return null
         }
 

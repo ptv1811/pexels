@@ -26,3 +26,11 @@ fun NetworkPhoto.toModel(): Photo = Photo(
     url = this.url,
     photographer = this.photographer
 )
+
+fun List<NetworkPhoto>.toModelList(): List<Photo> {
+    return this.map { it.toModel() }
+}
+
+fun List<Photo>.toNetworkList(): List<NetworkPhoto> {
+    return this.map { NetworkPhoto(it.id, it.width, it.height, it.url, it.photographer) }
+}

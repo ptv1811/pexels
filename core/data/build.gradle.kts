@@ -13,7 +13,7 @@ dependencies {
     api(project(":core:common"))
     implementation(project(":core:network"))
     implementation(project(":core:database"))
-//    testImplementation(project(":core:testing"))
+    testImplementation(project(":core:testing"))
 
     // Coroutines
     implementation(libs.coroutines.android)
