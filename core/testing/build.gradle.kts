@@ -8,7 +8,6 @@ android {
 }
 
 dependencies {
-
     implementation(project(":core:model"))
     implementation(libs.coroutines.android)
     implementation(libs.coroutines.test)
