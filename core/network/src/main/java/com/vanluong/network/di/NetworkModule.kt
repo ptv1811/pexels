@@ -1,7 +1,7 @@
 package com.vanluong.network.di
 
 import com.vanluong.network.BuildConfig
-import com.vanluong.network.adapters.ResultCallAdapterFactory
+import com.vanluong.network.adapters.NetworkResponseCallFactory
 import com.vanluong.network.interceptor.HttpRequestInterceptor
 import com.vanluong.network.service.PexelsClient
 import com.vanluong.network.service.PexelsService
@@ -47,7 +47,7 @@ internal object NetworkModule {
                 okHttpClient.get().newCall(it)
             }
             .addConverterFactory(MoshiConverterFactory.create())
-            .addCallAdapterFactory(ResultCallAdapterFactory.create())
+            .addCallAdapterFactory(NetworkResponseCallFactory.create())
             .build()
     }
 

@@ -1,7 +1,9 @@
 package com.vanluong.network
 
+import com.vanluong.model.NetworkResponse
 import com.vanluong.network.service.PexelsService
 import junit.framework.TestCase.assertNotNull
+import junit.framework.TestCase.fail
 import kotlinx.coroutines.test.runTest
 import okio.IOException
 import org.hamcrest.CoreMatchers.`is`
@@ -26,29 +28,38 @@ class PexelsServiceTest : ApiAbstract<PexelsService>() {
     @Test
     fun fetchPexelsPhotoListFromNetworkTest() = runTest {
         enqueueResponse("/PhotoListResponse.json")
-        val response = service.searchImage("nature", 3)
-        val networkResult = response.getOrNull()
-        assertThat(response.isSuccess, `is`(true))
+        when (val response = service.searchImage("nature", 3)) {
+            is NetworkResponse.Success -> {
+                val networkResult = response.body
+                assertNotNull(networkResult)
 
-        assertNotNull(networkResult)
+                assertThat(networkResult.page, `is`(1))
+                assertThat(networkResult.perPage, `is`(3))
+                assertThat(networkResult.photos.size, `is`(3))
+                assertThat(networkResult.totalResults, `is`(8000))
+                assertThat(
+                    networkResult.nextPage,
+                    `is`("https://api.pexels.com/v1/search?page=2&per_page=3&query=nature")
+                )
 
-        assertThat(networkResult!!.page, `is`(1))
-        assertThat(networkResult.perPage, `is`(3))
-        assertThat(networkResult.photos.size, `is`(3))
-        assertThat(networkResult.totalResults, `is`(8000))
-        assertThat(
-            networkResult.nextPage,
-            `is`("https://api.pexels.com/v1/search?page=2&per_page=3&query=nature")
-        )
+                val firstPhoto = networkResult.photos[0]
+                assertThat(firstPhoto.id, `is`(2325447))
+                assertThat(firstPhoto.width, `is`(5184))
+                assertThat(firstPhoto.height, `is`(3456))
+                assertThat(firstPhoto.photographer, `is`("Francesco Ungaro"))
+                assertThat(
+                    firstPhoto.url,
+                    `is`("https://www.pexels.com/photo/hot-air-balloon-2325447/")
+                )
+            }
 
-        val firstPhoto = networkResult.photos[0]
-        assertThat(firstPhoto.id, `is`(2325447))
-        assertThat(firstPhoto.width, `is`(5184))
-        assertThat(firstPhoto.height, `is`(3456))
-        assertThat(firstPhoto.photographer, `is`("Francesco Ungaro"))
-        assertThat(
-            firstPhoto.url,
-            `is`("https://www.pexels.com/photo/hot-air-balloon-2325447/")
-        )
+            is NetworkResponse.ServerError -> {
+                fail("Expected success but got server error: ${response.message}")
+            }
+
+            is NetworkResponse.NetworkError -> {
+                fail("Expected success but got network error: ${response.error.message}")
+            }
+        }
     }
 }
