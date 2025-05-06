@@ -1,7 +1,7 @@
 package com.vanluong.network
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.vanluong.network.adapters.ResultCallAdapterFactory
+import com.vanluong.network.adapters.NetworkResponseCallFactory
 import com.vanluong.testing.MainCoroutinesRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import okhttp3.mockwebserver.MockResponse
@@ -62,7 +62,7 @@ abstract class ApiAbstract<T> {
         return Retrofit.Builder()
             .baseUrl(mockWebServer.url("/"))
             .addConverterFactory(MoshiConverterFactory.create())
-            .addCallAdapterFactory(ResultCallAdapterFactory.create())
+            .addCallAdapterFactory(NetworkResponseCallFactory.create())
             .build()
             .create(clazz)
     }
