@@ -59,4 +59,29 @@ class SearchRepositoryImpl @Inject constructor(
             }
 
         }.flowOn(Dispatchers.IO)
+
+    override suspend fun fetchCuratedPhotos(): Flow<Resource<List<Photo>>> = flow {
+        when (val response = pexelsClient.fetchCuratedPhotos()) {
+            is Resource.Success -> {
+                val photos = response.body.photos.map { it.toModel() }
+                if (photos.isEmpty()) {
+                    emit(Resource.DataError(EmptyPhotoException()))
+                    return@flow
+                }
+                emit(Resource.Success(photos))
+            }
+
+            is Resource.DataError -> {
+                emit(Resource.DataError(response.error))
+            }
+
+            is Resource.ServerError -> {
+                emit(Resource.ServerError(response.code, response.message))
+            }
+
+            Resource.Loading -> {
+                // No need to emit anything for loading state
+            }
+        }
+    }
 }

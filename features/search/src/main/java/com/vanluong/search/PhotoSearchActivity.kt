@@ -1,14 +1,19 @@
 package com.vanluong.search
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.LoadState.Loading
+import androidx.paging.LoadState.NotLoading
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.vanluong.common.BaseActivity
 import com.vanluong.common.extensions.hideKeyboard
@@ -54,8 +59,15 @@ class PhotoSearchActivity :
                 layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             }
 
+            rvShimmer.apply {
+                adapter = shimmerAdapter
+                setHasFixedSize(true)
+                layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            }
+
             etSearch.apply {
                 addTextChangedListener {
+                    ivClearSearch.isVisible = it.toString().isNotEmpty()
                     photoSearchViewModel.onQueryChanged(it.toString())
                 }
 
@@ -67,6 +79,22 @@ class PhotoSearchActivity :
             ivClearSearch.setOnClickListener {
                 etSearch.text?.clear()
                 etSearch.requestFocus()
+            }
+        }
+
+        searchPhotoAdapter.addLoadStateListener { loadState ->
+            // This will handle the loading more progress bar at the bottom
+            val isLoadingMore =
+                loadState.source.append is Loading
+
+            // This will handle the shimmer loading state
+            val isInitialLoading =
+                loadState.source.refresh is Loading && loadState.source.prepend is NotLoading
+
+            binding {
+                rvPhotos.isVisible = !isInitialLoading
+                rvShimmer.isVisible = isInitialLoading
+                pbLoadMore.isVisible = isLoadingMore
             }
         }
     }
@@ -81,10 +109,11 @@ class PhotoSearchActivity :
                     if (resource != null) {
                         when (resource) {
                             is Resource.Loading -> {
-                                binding.rvPhotos.adapter = shimmerAdapter
+                                showLoading()
                             }
 
                             is Resource.Success -> {
+                                hideLoading()
                                 binding.rvPhotos.adapter = searchPhotoAdapter
                                 searchPhotoAdapter.submitData(resource.body)
                             }
@@ -96,6 +125,20 @@ class PhotoSearchActivity :
                     }
                 }
             }
+        }
+    }
+
+    private fun showLoading() {
+        binding {
+            rvPhotos.isVisible = false
+            rvShimmer.isVisible = true
+        }
+    }
+
+    private fun hideLoading() {
+        binding {
+            rvPhotos.isVisible = true
+            rvShimmer.isVisible = false
         }
     }
 }

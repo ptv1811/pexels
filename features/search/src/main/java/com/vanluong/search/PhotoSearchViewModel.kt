@@ -4,18 +4,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.vanluong.domain.FetchCuratedPhotoUseCase
 import com.vanluong.domain.SearchPhotoUseCase
 import com.vanluong.model.Photo
 import com.vanluong.model.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,12 +23,18 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class PhotoSearchViewModel @Inject constructor(
-    private val searchPhotoUseCase: SearchPhotoUseCase
+    private val searchPhotoUseCase: SearchPhotoUseCase,
+    private val curatedPhotoUseCase: FetchCuratedPhotoUseCase
 ) : ViewModel() {
     private val _currentQuery = MutableStateFlow("")
-    private var _currentSearchResult: MutableStateFlow<Resource<PagingData<Photo>>?> =
+
+    // Memory cache for the curated photo list, because next time user open the app
+    // we don't want user to see old curated photo list
+    private var _curatedPhotoList: PagingData<Photo>? = null
+
+    private var _currentPhotoList: MutableStateFlow<Resource<PagingData<Photo>>?> =
         MutableStateFlow(null)
-    val currentSearchResultStateFlow = _currentSearchResult.asStateFlow()
+    val currentSearchResultStateFlow = _currentPhotoList.asStateFlow()
 
     init {
         observeSearchQuery()
@@ -43,18 +47,32 @@ class PhotoSearchViewModel @Inject constructor(
     private fun observeSearchQuery() = viewModelScope.launch {
         _currentQuery
             .debounce(500) // Wait 500ms after last input
-            .filter { it.isNotBlank() } // Skip empty query
             .distinctUntilChanged() // Only trigger search if query is different
             .collectLatest { query ->
-                // clear the previous search result
+                if (query.isEmpty()) {
+                    // If there is no query, we want to show the curated photo list
+                    fetchCuratedPhotos()
+                    return@collectLatest
+                }
+                _currentPhotoList.value = Resource.Loading
+
                 searchPhotoUseCase(query).cachedIn(viewModelScope).collectLatest {
-                    _currentSearchResult.value = Resource.Success(it)
+                    _currentPhotoList.value = Resource.Success(it)
                 }
             }
     }
 
+    private fun fetchCuratedPhotos() = viewModelScope.launch {
+        _currentPhotoList.value = Resource.Loading
+        curatedPhotoUseCase().cachedIn(viewModelScope).collectLatest {
+            if (_curatedPhotoList == null) {
+                _curatedPhotoList = it
+            }
+            _currentPhotoList.value = Resource.Success(_curatedPhotoList!!)
+        }
+    }
+
     fun onQueryChanged(query: String) = viewModelScope.launch {
-        _currentSearchResult.emit(Resource.Loading)
         _currentQuery.value = query
     }
 }

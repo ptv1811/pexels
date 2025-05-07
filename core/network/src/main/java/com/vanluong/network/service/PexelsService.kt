@@ -21,4 +21,16 @@ interface PexelsService {
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
     ): Resource<NetworkSearchResult>
+
+    /**
+     * Get a list of curated photos from the Pexels API.
+     * This helps when user opens app for the first time or just delete their searches.
+     * so we display curated photos to them.
+     *
+     * @param perPage The number of photos to return per page.
+     */
+    @GET("curated")
+    suspend fun fetchCuratedPhotos(
+        @Query("per_page") perPage: Int = 20
+    ): Resource<NetworkSearchResult>
 }
