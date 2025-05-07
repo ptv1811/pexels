@@ -15,9 +15,9 @@ interface PexelsService {
      * @param query The user input.
      * @param perPage The number of photos to return per page.
      */
-    @GET("search/{query}")
+    @GET("search")
     suspend fun searchImage(
-        @Path("query") query: String,
+        @Query("query") query: String,
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
     ): Resource<NetworkSearchResult>

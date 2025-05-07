@@ -2,12 +2,11 @@ package com.vanluong.data.repository.search
 
 import com.vanluong.database.dao.RecentSearchQueryDao
 import com.vanluong.database.entity.RecentSearchQueryEntity
-import com.vanluong.model.Resource
 import com.vanluong.model.Photo
+import com.vanluong.model.Resource
 import com.vanluong.model.exception.EmptyPhotoException
 import com.vanluong.network.model.toModel
 import com.vanluong.network.service.PexelsClient
-import com.vanluong.network.service.PexelsService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -52,6 +51,10 @@ class SearchRepositoryImpl @Inject constructor(
 
                 is Resource.ServerError -> {
                     emit(Resource.ServerError(response.code, response.message))
+                }
+
+                Resource.Loading -> {
+                    // No need to emit anything for loading state
                 }
             }
 

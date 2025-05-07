@@ -27,6 +27,10 @@ dependencies {
     implementation(libs.android.hilt)
     ksp(libs.hilt.compiler)
 
+    // Paging
+    implementation(libs.androidx.paging.common.android)
+    implementation(libs.paging)
+
     // Testing
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)
