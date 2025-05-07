@@ -24,4 +24,11 @@ class PexelsClient @Inject constructor(
         perPage: Int = 15
     ): Resource<NetworkSearchResult> =
         pexelsService.searchImage(query, page, perPage)
+
+    /**
+     * Fetches a list of curated photos from the API.
+     */
+    suspend fun fetchCuratedPhotos(
+    ): Resource<NetworkSearchResult> =
+        pexelsService.fetchCuratedPhotos()
 }

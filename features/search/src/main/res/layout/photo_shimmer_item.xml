@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/shimmerContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:shimmer_auto_start="true"
+        app:shimmer_base_alpha="0.9"
+        app:shimmer_base_color="@color/shimmerBase"
+        app:shimmer_highlight_alpha="1.0"
+        app:shimmer_highlight_color="@color/shimmerHighlight">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/shimmerBox"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            app:cardBackgroundColor="@color/shimmerBase"
+            app:cardCornerRadius="10dp" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+</LinearLayout>
