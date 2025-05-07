@@ -26,8 +26,9 @@ android {
 }
 
 dependencies {
-
     implementation(project(":features:search"))
+    implementation(project(":features:details"))
+
     implementation(project(":core:data"))
     implementation(project(":core:model"))
     implementation(project(":core:common"))
@@ -41,6 +42,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Navigation
+    api(libs.androidx.navigation.fragment.ktx)
+    api(libs.androidx.navigation.ui.ktx)
+    api(libs.androidx.navigation.dynamic.features.fragment)
 
     // Viewmodel
     implementation(libs.androidx.lifecyle.viewmodel.ktx)

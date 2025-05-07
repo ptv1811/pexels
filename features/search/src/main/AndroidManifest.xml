@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name=".PhotoSearchActivity"
+            android:name=".PhotoSearchFragment"
             android:exported="true" />
     </application>
 
