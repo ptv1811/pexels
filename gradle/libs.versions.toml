@@ -1,6 +1,8 @@
 [versions]
 baserecyclerviewadapter = "1.0.4"
+fragmentKtx = "1.8.6"
 kspVersion = "4.14.2"
+navigationFragmentKtx = "2.9.0"
 targetSdk = "35"
 jvmBytecode = "17"
 
@@ -35,6 +37,7 @@ sandwich = "2.1.1"
 shimmerVersion = "0.5.0"
 secrets = "2.0.1"
 coreKtxVersion = "1.6.1"
+navigationCommonAndroid = "2.9.0-rc01"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
@@ -46,8 +49,12 @@ androidx-arch-core = { group = "androidx.arch.core", name = "core-testing", vers
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-lifecyle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+androidx-navigation-dynamic-features-fragment = { module = "androidx.navigation:navigation-dynamic-features-fragment", version.ref = "navigationFragmentKtx" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationFragmentKtx" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
@@ -78,6 +85,7 @@ turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine
 sandwich = { group = "com.github.skydoves", name = "sandwich-retrofit", version.ref = "sandwich" }
 core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtxVersion" }
 androidx-paging-common-android = { group = "androidx.paging", name = "paging-common-android", version.ref = "paging" }
+androidx-navigation-common-android = { group = "androidx.navigation", name = "navigation-common-android", version.ref = "navigationCommonAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

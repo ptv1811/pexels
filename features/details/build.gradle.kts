@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.vanluong.search"
+    namespace = "com.vanluong.details"
     buildFeatures {
         dataBinding = true
         buildConfig = true
@@ -17,7 +17,6 @@ android {
 dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:domain"))
-    implementation(libs.androidx.navigation.common.android)
 
     // Module for unit testing
     testImplementation(project(":core:testing"))
