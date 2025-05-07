@@ -1,8 +1,6 @@
 package com.vanluong.search
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.core.view.ViewCompat
@@ -12,9 +10,11 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.LoadState.Error
 import androidx.paging.LoadState.Loading
 import androidx.paging.LoadState.NotLoading
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.vanluong.common.BaseActivity
 import com.vanluong.common.extensions.hideKeyboard
 import com.vanluong.model.Resource
@@ -24,6 +24,7 @@ import com.vanluong.search.databinding.ActivityPhotoSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class PhotoSearchActivity :
@@ -96,6 +97,15 @@ class PhotoSearchActivity :
                 rvShimmer.isVisible = isInitialLoading
                 pbLoadMore.isVisible = isLoadingMore
             }
+
+            val errorState = loadState.source.append as? Error
+                ?: loadState.source.prepend as? Error
+                ?: loadState.append as? Error
+                ?: loadState.prepend as? Error
+
+            errorState?.let {
+                showError(it)
+            }
         }
     }
 
@@ -119,7 +129,7 @@ class PhotoSearchActivity :
                             }
 
                             else -> {
-                                // Handle error state
+                                // Error will be handled in the [addLoadStateListener]
                             }
                         }
                     }
@@ -140,5 +150,11 @@ class PhotoSearchActivity :
             rvPhotos.isVisible = true
             rvShimmer.isVisible = false
         }
+    }
+
+    private fun showError(error: Error) {
+        Snackbar
+            .make(binding.root, error.error.message ?: "Unknown Error", Snackbar.LENGTH_LONG)
+            .show()
     }
 }
