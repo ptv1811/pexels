@@ -24,7 +24,6 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.moshi)
     implementation(libs.okhttp.logging.interceptor)
-    implementation(libs.sandwich)
     testImplementation(libs.okhttp.mockserver)
     testImplementation(libs.androidx.arch.core)
 

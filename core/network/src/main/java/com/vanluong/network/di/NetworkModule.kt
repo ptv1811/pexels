@@ -43,9 +43,7 @@ internal object NetworkModule {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BACKEND_URL)
             // Lazy-loading the OkHttpClient to prevent initializing OkHttp on the main thread
-            .callFactory {
-                okHttpClient.get().newCall(it)
-            }
+            .callFactory(okHttpClient.get())
             .addConverterFactory(MoshiConverterFactory.create())
             .addCallAdapterFactory(NetworkResponseCallFactory.create())
             .build()
