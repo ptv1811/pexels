@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_nav_graph"
+    app:startDestination="@id/search">
+
+    <fragment
+        android:id="@+id/search"
+        android:name="com.vanluong.search.main.PhotoSearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_photo_search">
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/details"
+        android:name="com.vanluong.search.details.DetailsFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_details">
+
+        <argument
+            android:name="photoId"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

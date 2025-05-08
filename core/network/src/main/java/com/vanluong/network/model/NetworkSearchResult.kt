@@ -13,5 +13,4 @@ data class NetworkSearchResult(
     @field:Json(name = "per_page") val perPage: Int,
     @field:Json(name = "photos") val photos: List<NetworkPhoto>,
     @field:Json(name = "total_results") val totalResults: Int,
-    @field:Json(name = "next_page") val nextPage: String,
 )

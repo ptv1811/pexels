@@ -27,7 +27,6 @@ android {
 
 dependencies {
     implementation(project(":features:search"))
-    implementation(project(":features:details"))
 
     implementation(project(":core:data"))
     implementation(project(":core:model"))

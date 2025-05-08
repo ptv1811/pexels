@@ -1,6 +1,7 @@
-package com.vanluong.search.adapter
+package com.vanluong.search.main.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -17,7 +18,7 @@ import com.vanluong.search.databinding.PhotoItemBinding
  * on 07,May,2025
  *
  */
-class SearchPhotoAdapter(val clickListener: (Photo) -> Unit) :
+class SearchPhotoAdapter(val clickListener: (Photo, View) -> Unit) :
     PagingDataAdapter<Photo, SearchPhotoAdapter.SearchPhotoViewHolder>(SearchPhotoDiffCallback()) {
 
     override fun onBindViewHolder(holder: SearchPhotoViewHolder, position: Int) {
@@ -47,6 +48,8 @@ class SearchPhotoAdapter(val clickListener: (Photo) -> Unit) :
                 height = targetSize.height
             }
 
+            binding.ivPhoto.transitionName = "shared_image_${photo.id}"
+
             Glide.with(root.context).load(photo.url)
                 .override(targetSize.width, targetSize.height)
                 .centerCrop()
@@ -55,7 +58,7 @@ class SearchPhotoAdapter(val clickListener: (Photo) -> Unit) :
                 .into(binding.ivPhoto)
 
             root.setOnClickListener {
-                clickListener(photo)
+                clickListener(photo, binding.ivPhoto)
             }
         }
     }

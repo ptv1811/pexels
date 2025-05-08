@@ -31,4 +31,12 @@ class PexelsClient @Inject constructor(
     suspend fun fetchCuratedPhotos(
     ): Resource<NetworkSearchResult> =
         pexelsService.fetchCuratedPhotos()
+
+    /**
+     * Fetches detail of a specific photo from the API.
+     */
+    suspend fun fetchPhotoDetails(
+        photoId: String
+    ): Resource<NetworkPhoto> =
+        pexelsService.fetchPhoto(photoId)
 }

@@ -35,6 +35,7 @@ object MockDataUtil {
                 height = 200,
                 url = "https://example.com/photo1.jpg",
                 photographer = "John Doe",
+                alt = "Beautiful scenery",
             ),
             Photo(
                 id = 2,
@@ -42,6 +43,7 @@ object MockDataUtil {
                 height = 400,
                 url = "https://example.com/photo2.jpg",
                 photographer = "Jane Smith",
+                alt = "Hello world",
             ),
         )
     }

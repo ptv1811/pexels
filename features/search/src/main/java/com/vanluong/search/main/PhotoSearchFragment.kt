@@ -1,16 +1,15 @@
-package com.vanluong.search
+package com.vanluong.search.main
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.net.toUri
+import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.NavDeepLinkRequest
-import androidx.navigation.NavOptions
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState.Error
 import androidx.paging.LoadState.Loading
@@ -19,10 +18,12 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.vanluong.common.BaseFragment
 import com.vanluong.common.extensions.hideKeyboard
+import com.vanluong.model.Photo
 import com.vanluong.model.Resource
-import com.vanluong.search.adapter.SearchPhotoAdapter
-import com.vanluong.search.adapter.ShimmerAdapter
+import com.vanluong.search.R
 import com.vanluong.search.databinding.FragmentPhotoSearchBinding
+import com.vanluong.search.main.adapter.SearchPhotoAdapter
+import com.vanluong.search.main.adapter.ShimmerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -37,8 +38,8 @@ class PhotoSearchFragment :
     }
 
     private val searchPhotoAdapter: SearchPhotoAdapter by lazy {
-        SearchPhotoAdapter { photo ->
-            navigateToDetails()
+        SearchPhotoAdapter { photo, photoView ->
+            navigateToDetails(photo, photoView)
         }
     }
     private val shimmerAdapter = ShimmerAdapter()
@@ -47,6 +48,11 @@ class PhotoSearchFragment :
         super.onViewCreated(view, savedInstanceState)
         initUI()
         observePhotoSearchResult()
+
+        // This is to postpone the enter transition until the layout is drawn.
+        // Used by hero animation.
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
     }
 
     /**
@@ -138,22 +144,20 @@ class PhotoSearchFragment :
         }
     }
 
-    private fun navigateToDetails() {
-        // We will use the deep link to navigate to the details fragment
-        val request = NavDeepLinkRequest.Builder
-            .fromUri("android-app://com.vanluong.pexels/details_fragment".toUri())
-            .build()
+    private fun navigateToDetails(photo: Photo, photoView: View) {
+        // Save recent photo to retrieve in [DetailsFragment]
+        // So that we don't have to fetch data from network again.
+        photoSearchViewModel.saveRecentPhoto(photo)
 
-        // Navigation options to add animation
-        val navOptions =
-            NavOptions.Builder()
-                .setEnterAnim(androidx.navigation.ui.R.anim.nav_default_enter_anim)
-                .setExitAnim(androidx.navigation.ui.R.anim.nav_default_exit_anim)
-                .setPopEnterAnim(androidx.navigation.ui.R.anim.nav_default_pop_enter_anim)
-                .setPopExitAnim(androidx.navigation.ui.R.anim.nav_default_pop_exit_anim)
-                .build()
+        val action =
+            PhotoSearchFragmentDirections.actionSearchFragmentToDetailsFragment(photo.id.toString())
 
-        navController.navigate(request, navOptions)
+        // We use shared element to animate the hero effect.
+        val extras = FragmentNavigatorExtras(
+            photoView to "shared_image_${photo.id}",
+        )
+
+        navController.navigate(action, extras)
     }
 
     private fun showLoading() {
