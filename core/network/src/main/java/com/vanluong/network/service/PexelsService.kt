@@ -1,6 +1,7 @@
 package com.vanluong.network.service
 
 import com.vanluong.model.Resource
+import com.vanluong.network.model.NetworkPhoto
 import com.vanluong.network.model.NetworkSearchResult
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -33,4 +34,14 @@ interface PexelsService {
     suspend fun fetchCuratedPhotos(
         @Query("per_page") perPage: Int = 20
     ): Resource<NetworkSearchResult>
+
+    /**
+     * Get details of specific photo from the Pexels API.
+     *
+     * @param photoId The ID of the photo to fetch details for.
+     */
+    @GET("photos/{id}")
+    suspend fun fetchPhoto(
+        @Path("id") photoId: String
+    ): Resource<NetworkPhoto>
 }

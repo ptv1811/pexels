@@ -5,7 +5,8 @@ data class Photo(
     val width: Int,
     val height: Int,
     val url: String,
-    val photographer: String
+    val photographer: String,
+    val alt: String
 )
 
 data class TargetSize(val width: Int, val height: Int)

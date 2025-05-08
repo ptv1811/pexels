@@ -1,10 +1,12 @@
-package com.vanluong.search
+package com.vanluong.search.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.vanluong.domain.FetchCuratedPhotoUseCase
+import com.vanluong.domain.GetRecentPhotoUseCase
+import com.vanluong.domain.SaveRecentPhotoUseCase
 import com.vanluong.domain.SearchPhotoUseCase
 import com.vanluong.model.Photo
 import com.vanluong.model.Resource
@@ -24,7 +26,9 @@ import javax.inject.Inject
 @HiltViewModel
 class PhotoSearchViewModel @Inject constructor(
     private val searchPhotoUseCase: SearchPhotoUseCase,
-    private val curatedPhotoUseCase: FetchCuratedPhotoUseCase
+    private val curatedPhotoUseCase: FetchCuratedPhotoUseCase,
+    private val saveRecentPhotoUseCase: SaveRecentPhotoUseCase,
+    private val getRecentPhotoUseCase: GetRecentPhotoUseCase
 ) : ViewModel() {
     private val _currentQuery = MutableStateFlow("")
 
@@ -36,8 +40,17 @@ class PhotoSearchViewModel @Inject constructor(
         MutableStateFlow(null)
     val currentSearchResultStateFlow = _currentPhotoList.asStateFlow()
 
+
     init {
         observeSearchQuery()
+    }
+
+    fun onQueryChanged(query: String) = viewModelScope.launch {
+        _currentQuery.value = query
+    }
+
+    fun saveRecentPhoto(photo: Photo) = viewModelScope.launch {
+        saveRecentPhotoUseCase(photo)
     }
 
     /*
@@ -70,9 +83,5 @@ class PhotoSearchViewModel @Inject constructor(
             }
             _currentPhotoList.value = Resource.Success(_curatedPhotoList!!)
         }
-    }
-
-    fun onQueryChanged(query: String) = viewModelScope.launch {
-        _currentQuery.value = query
     }
 }

@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.vanluong.model.Photo
 import com.vanluong.model.Resource
+import com.vanluong.network.model.toModel
 import javax.inject.Inject
 
 /**
@@ -34,8 +35,11 @@ class PhotoPagingSource @Inject constructor(
             searchRepository.searchPhotos(query, position, NETWORK_PAGE_SIZE).collect { response ->
                 loadResult = when (response) {
                     is Resource.Success -> {
-                        val photos = response.body
-                        val nextKey = if (photos.isEmpty()) null else position + 1
+                        val photos = response.body.photos.map { it.toModel() }
+                        val totalResults = response.body.totalResults
+
+                        val nextKey =
+                            if (NETWORK_PAGE_SIZE * position < totalResults) position + 1 else null
                         LoadResult.Page(
                             data = photos,
                             prevKey = if (position == STARTING_PAGE) null else position - 1,

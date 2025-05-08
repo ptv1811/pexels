@@ -14,7 +14,8 @@ data class NetworkPhoto(
     @field:Json(name = "height") val height: Int,
     @field:Json(name = "url") val url: String,
     @field:Json(name = "photographer") val photographer: String,
-    @field:Json(name = "src") val src: Src
+    @field:Json(name = "src") val src: Src,
+    @field:Json(name = "alt") val alt: String,
 )
 
 @JsonClass(generateAdapter = true)
@@ -30,7 +31,8 @@ fun NetworkPhoto.toModel(): Photo = Photo(
     width = this.width,
     height = this.height,
     url = this.src.original,
-    photographer = this.photographer
+    photographer = this.photographer,
+    alt = this.alt
 )
 
 fun List<NetworkPhoto>.toModelList(): List<Photo> {
@@ -45,7 +47,8 @@ fun List<Photo>.toNetworkList(): List<NetworkPhoto> {
             it.height,
             it.url,
             it.photographer,
-            Src(original = it.url)
+            Src(original = it.url),
+            it.alt
         )
     }
 }

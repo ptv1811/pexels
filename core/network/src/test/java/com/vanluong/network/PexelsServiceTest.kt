@@ -28,7 +28,7 @@ class PexelsServiceTest : ApiAbstract<PexelsService>() {
     @Test
     fun fetchPexelsPhotoListFromNetworkTest() = runTest {
         enqueueResponse("/PhotoListResponse.json")
-        when (val response = service.searchImage("nature", 3)) {
+        when (val response = service.searchImage("nature", 3, 20)) {
             is Resource.Success -> {
                 val networkResult = response.body
                 assertNotNull(networkResult)
@@ -37,10 +37,6 @@ class PexelsServiceTest : ApiAbstract<PexelsService>() {
                 assertThat(networkResult.perPage, `is`(3))
                 assertThat(networkResult.photos.size, `is`(3))
                 assertThat(networkResult.totalResults, `is`(8000))
-                assertThat(
-                    networkResult.nextPage,
-                    `is`("https://api.pexels.com/v1/search?page=2&per_page=3&query=nature")
-                )
 
                 val firstPhoto = networkResult.photos[0]
                 assertThat(firstPhoto.id, `is`(2325447))
@@ -59,6 +55,10 @@ class PexelsServiceTest : ApiAbstract<PexelsService>() {
 
             is Resource.DataError -> {
                 fail("Expected success but got network error: ${response.error.message}")
+            }
+
+            Resource.Loading -> {
+                fail("Expected success but got loading state")
             }
         }
     }

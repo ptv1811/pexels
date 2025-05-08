@@ -5,6 +5,7 @@ import com.vanluong.database.entity.RecentSearchQueryEntity
 import com.vanluong.model.Photo
 import com.vanluong.model.Resource
 import com.vanluong.model.exception.EmptyPhotoException
+import com.vanluong.network.model.NetworkSearchResult
 import com.vanluong.network.model.toModel
 import com.vanluong.network.service.PexelsClient
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +27,7 @@ class SearchRepositoryImpl @Inject constructor(
         query: String,
         page: Int,
         perPage: Int
-    ): Flow<Resource<List<Photo>>> =
+    ): Flow<Resource<NetworkSearchResult>> =
         flow {
             pexelsDao.insertOrReplaceRecentSearchQuery(
                 RecentSearchQueryEntity(
@@ -37,12 +38,12 @@ class SearchRepositoryImpl @Inject constructor(
 
             when (val response = pexelsClient.searchImages(query, page, perPage)) {
                 is Resource.Success -> {
-                    val photos = response.body.photos.map { it.toModel() }
+                    val photos = response.body.photos
                     if (photos.isEmpty()) {
                         emit(Resource.DataError(EmptyPhotoException()))
                         return@flow
                     }
-                    emit(Resource.Success(photos))
+                    emit(Resource.Success(response.body))
                 }
 
                 is Resource.DataError -> {

@@ -47,7 +47,6 @@ class SearchRepositoryTest {
             perPage = 10,
             totalResults = 100,
             photos = mockNetworkPhotoList,
-            nextPage = "https://api.pexels.com/v1/search?page=3&per_page=3&query=nature"
         )
 
         whenever(pexelsService.searchImage("nature", 1, 10))
@@ -56,7 +55,7 @@ class SearchRepositoryTest {
         searchRepository.searchPhotos("nature", 1, 10).test {
             val expectItem = awaitItem()
             assert(expectItem is Resource.Success)
-            val expectBody = (expectItem as Resource.Success).body
+            val expectBody = (expectItem as Resource.Success).body.photos
 
             assert(expectBody.size == 2)
             assert(expectBody[0].id == 1L)

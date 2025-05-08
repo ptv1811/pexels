@@ -1,4 +1,4 @@
-package com.vanluong.search.adapter
+package com.vanluong.search.main.adapter
 
 import android.view.LayoutInflater
 import android.view.View

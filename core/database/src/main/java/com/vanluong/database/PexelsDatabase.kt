@@ -3,7 +3,9 @@ package com.vanluong.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.vanluong.database.dao.RecentPhotosDao
 import com.vanluong.database.dao.RecentSearchQueryDao
+import com.vanluong.database.entity.PhotoEntity
 import com.vanluong.database.entity.RecentSearchQueryEntity
 import com.vanluong.database.util.InstantConverter
 
@@ -12,7 +14,7 @@ import com.vanluong.database.util.InstantConverter
  * on 06,May,2025
  */
 @Database(
-    entities = [RecentSearchQueryEntity::class],
+    entities = [RecentSearchQueryEntity::class, PhotoEntity::class],
     version = 1,
     exportSchema = true
 )
@@ -21,4 +23,6 @@ import com.vanluong.database.util.InstantConverter
 )
 abstract class PexelsDatabase : RoomDatabase() {
     abstract fun recentSearchQueryDao(): RecentSearchQueryDao
+
+    abstract fun recentPhotosDao(): RecentPhotosDao
 }

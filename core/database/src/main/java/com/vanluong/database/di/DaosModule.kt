@@ -1,6 +1,7 @@
 package com.vanluong.database.di
 
 import com.vanluong.database.PexelsDatabase
+import com.vanluong.database.dao.RecentPhotosDao
 import com.vanluong.database.dao.RecentSearchQueryDao
 import dagger.Module
 import dagger.Provides
@@ -17,7 +18,7 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 internal object DaosModule {
     /**
-     * Provides an instance of [PexelsDatabase] using Room.
+     * Provides an instance of [RecentSearchQueryDao] using Room.
      *
      * @param database The [PexelsDatabase] instance.
      * @return An instance of [RecentSearchQueryDao].
@@ -27,5 +28,18 @@ internal object DaosModule {
         database: PexelsDatabase,
     ): RecentSearchQueryDao {
         return database.recentSearchQueryDao()
+    }
+
+    /**
+     * Provides an instance of [RecentPhotosDao] using Room.
+     *
+     * @param database The [PexelsDatabase] instance.
+     * @return An instance of [RecentPhotosDao].
+     */
+    @Provides
+    fun provideRecentPhotosDao(
+        database: PexelsDatabase,
+    ): RecentPhotosDao {
+        return database.recentPhotosDao()
     }
 }
