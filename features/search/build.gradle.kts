@@ -67,6 +67,8 @@ dependencies {
     implementation(libs.androidx.paging.common.android)
     implementation(libs.paging)
 
+    implementation(libs.getstream.photoview)
+
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.kotlin)

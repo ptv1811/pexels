@@ -3,6 +3,7 @@ baserecyclerviewadapter = "1.0.4"
 fragmentKtx = "1.8.6"
 kspVersion = "4.14.2"
 navigationFragmentKtx = "2.9.0"
+photoviewVersion = "1.0.3"
 targetSdk = "35"
 jvmBytecode = "17"
 
@@ -13,7 +14,6 @@ appcompat = "1.7.0"
 constraintlayout = "2.2.1"
 coreKtx = "1.16.0"
 coroutines = "1.6.0"
-datastore = "1.1.1"
 espressoCore = "3.6.1"
 glide = "4.16.0"
 hiltCore = "2.56"
@@ -29,11 +29,10 @@ moshi = "1.15.2"
 okhttp = "4.7.2"
 paging = "3.3.6"
 recyclerView = "1.3.2"
-retrofit = "2.9.0"
+retrofit = "2.11.0"
 robolectric = "4.14.1"
 room = "2.6.1"
 turbine = "1.2.0"
-sandwich = "2.1.1"
 shimmerVersion = "0.5.0"
 secrets = "2.0.1"
 coreKtxVersion = "1.6.1"
@@ -61,8 +60,8 @@ androidx-room-paging = { group = "androidx.room", name = "room-paging", version.
 baserecyclerviewadapter = { module = "com.github.skydoves:baserecyclerviewadapter", version.ref = "baserecyclerviewadapter" }
 coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
-datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 facebook-shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmerVersion" }
+getstream-photoview = { module = "io.getstream:photoview", version.ref = "photoviewVersion" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 hilt-android-processor = { group = "com.google.dagger", name = "dagger-android-processor", version.ref = "hiltCore" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltCore" }
@@ -82,7 +81,6 @@ retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = 
 retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
-sandwich = { group = "com.github.skydoves", name = "sandwich-retrofit", version.ref = "sandwich" }
 core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtxVersion" }
 androidx-paging-common-android = { group = "androidx.paging", name = "paging-common-android", version.ref = "paging" }
 androidx-navigation-common-android = { group = "androidx.navigation", name = "navigation-common-android", version.ref = "navigationCommonAndroid" }

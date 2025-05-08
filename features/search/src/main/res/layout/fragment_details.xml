@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <io.getstream.photoview.PhotoView
                 android:id="@+id/ivDetailsImage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
