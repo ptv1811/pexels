@@ -41,4 +41,4 @@ include(":core:domain")
 include(":core:testing")
 
 include(":features:search")
-//include(":features:details")
+include(":features:recent")

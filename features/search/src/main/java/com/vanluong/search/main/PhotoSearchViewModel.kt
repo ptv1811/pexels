@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.vanluong.domain.FetchCuratedPhotoUseCase
-import com.vanluong.domain.GetRecentPhotoUseCase
 import com.vanluong.domain.SaveRecentPhotoUseCase
 import com.vanluong.domain.SearchPhotoUseCase
 import com.vanluong.model.Photo
@@ -28,7 +27,6 @@ class PhotoSearchViewModel @Inject constructor(
     private val searchPhotoUseCase: SearchPhotoUseCase,
     private val curatedPhotoUseCase: FetchCuratedPhotoUseCase,
     private val saveRecentPhotoUseCase: SaveRecentPhotoUseCase,
-    private val getRecentPhotoUseCase: GetRecentPhotoUseCase
 ) : ViewModel() {
     private val _currentQuery = MutableStateFlow("")
 

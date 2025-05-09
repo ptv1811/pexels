@@ -2,6 +2,7 @@ package com.vanluong.data.repository.photo
 
 import com.vanluong.database.dao.RecentPhotosDao
 import com.vanluong.database.entity.toDomain
+import com.vanluong.database.entity.toDomainList
 import com.vanluong.database.entity.toEntity
 import com.vanluong.model.Photo
 import kotlinx.coroutines.Dispatchers
@@ -24,5 +25,9 @@ class PhotoRepositoryImpl @Inject constructor(
 
     override suspend fun getPhotoById(id: String): Flow<Photo?> = flow {
         emit(recentPhotosDao.getPhotoById(id)?.toDomain())
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun getRecentPhotos(): Flow<List<Photo>> = flow {
+        emit(recentPhotosDao.getAllPhotos().toDomainList())
     }.flowOn(Dispatchers.IO)
 }

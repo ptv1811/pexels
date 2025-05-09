@@ -64,6 +64,10 @@ class PhotoSearchFragment :
                 adapter = searchPhotoAdapter
                 setHasFixedSize(true)
                 layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                setOnTouchListener { _, _ ->
+                    etSearch.clearFocus()
+                    false
+                }
             }
 
             rvShimmer.apply {
