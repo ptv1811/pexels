@@ -56,7 +56,7 @@
    git clone https://github.com/ptv1811/pexels.git
    ```
 
-2. Create a `secrets.properties` file and fill in these options:
+2. Create a `secrets.properties` file at root directory and fill in these options:
     ```
     PEXELS_API_KEY="<Your Pexels API key>"
     BACKEND_URL="https://api.pexels.com/v1/"
