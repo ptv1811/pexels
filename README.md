@@ -152,7 +152,7 @@ development of this application.
 ---------------
 Some planned or possible enhancements:
 
-**Support Build variants**
+**Support Build variants** \
 Due to time constraint, I don't have enough time to support build variance but it will be a good
 improvements in the future.
 
