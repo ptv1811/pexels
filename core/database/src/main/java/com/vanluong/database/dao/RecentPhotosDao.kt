@@ -15,7 +15,7 @@ import com.vanluong.database.entity.PhotoEntity
 @Dao
 interface RecentPhotosDao {
     @Query("SELECT * FROM recentPhotos WHERE id = :id")
-    suspend fun getPhotoById(id: String): PhotoEntity?
+    suspend fun getPhotoById(id: Long): PhotoEntity?
 
     @Query("SELECT * FROM recentPhotos ORDER BY timestamp DESC")
     suspend fun getAllPhotos(): List<PhotoEntity>

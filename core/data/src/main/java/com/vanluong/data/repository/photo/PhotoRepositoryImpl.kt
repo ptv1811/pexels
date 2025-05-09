@@ -23,7 +23,7 @@ class PhotoRepositoryImpl @Inject constructor(
         recentPhotosDao.enforceLRULimit()
     }
 
-    override suspend fun getPhotoById(id: String): Flow<Photo?> = flow {
+    override suspend fun getPhotoById(id: Long): Flow<Photo?> = flow {
         emit(recentPhotosDao.getPhotoById(id)?.toDomain())
     }.flowOn(Dispatchers.IO)
 

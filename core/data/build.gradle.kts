@@ -11,7 +11,7 @@ android {
 dependencies {
     api(project(":core:model"))
     api(project(":core:common"))
-    implementation(project(":core:network"))
+    api(project(":core:network"))
     implementation(project(":core:database"))
     testImplementation(project(":core:testing"))
 

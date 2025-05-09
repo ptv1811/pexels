@@ -154,7 +154,7 @@ class PhotoSearchFragment :
         photoSearchViewModel.saveRecentPhoto(photo)
 
         val action =
-            PhotoSearchFragmentDirections.actionSearchFragmentToDetailsFragment(photo.id.toString())
+            PhotoSearchFragmentDirections.actionSearchFragmentToDetailsFragment(photo.id)
 
         // We use shared element to animate the hero effect.
         val extras = FragmentNavigatorExtras(
