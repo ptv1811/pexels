@@ -12,7 +12,7 @@ import javax.inject.Inject
 class GetRecentPhotoUseCase @Inject constructor(
     private val photoRepository: PhotoRepository
 ) {
-    suspend operator fun invoke(id: String): Flow<Photo?> {
+    suspend operator fun invoke(id: Long): Flow<Photo?> {
         return photoRepository.getPhotoById(id)
     }
 }

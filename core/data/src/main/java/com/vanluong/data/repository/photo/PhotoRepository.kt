@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface PhotoRepository {
     suspend fun cachePhoto(photo: Photo)
 
-    suspend fun getPhotoById(id: String): Flow<Photo?>
+    suspend fun getPhotoById(id: Long): Flow<Photo?>
 
     suspend fun getRecentPhotos(): Flow<List<Photo>>
 }

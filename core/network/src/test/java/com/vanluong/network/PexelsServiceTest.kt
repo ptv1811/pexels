@@ -10,7 +10,6 @@ import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
-import kotlin.jvm.Throws
 
 /**
  * Created by van.luong
@@ -50,7 +49,7 @@ class PexelsServiceTest : ApiAbstract<PexelsService>() {
             }
 
             is Resource.ServerError -> {
-                fail("Expected success but got server error: ${response.message}")
+                fail("Expected success but got server error: ${response.error.message}")
             }
 
             is Resource.DataError -> {

@@ -23,7 +23,7 @@ class DetailsViewModel @Inject constructor(
     private val _selectedPhotoStateFlow: MutableStateFlow<Photo?> = MutableStateFlow(null)
     val selectedPhotoStateFlow = _selectedPhotoStateFlow.asStateFlow()
 
-    fun getRecentPhoto(id: String) = viewModelScope.launch {
+    fun getRecentPhoto(id: Long) = viewModelScope.launch {
         getRecentPhotoUseCase(id).collectLatest { photo ->
             _selectedPhotoStateFlow.value = photo
         }

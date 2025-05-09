@@ -48,7 +48,7 @@ class PhotoPagingSource @Inject constructor(
                     }
 
                     is Resource.ServerError -> {
-                        LoadResult.Error(Exception("Server error: ${response.message}"))
+                        LoadResult.Error(Exception("Server error: ${response.error.message}"))
                     }
 
                     is Resource.DataError -> {
