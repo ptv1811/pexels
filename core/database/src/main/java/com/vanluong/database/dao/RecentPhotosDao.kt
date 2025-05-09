@@ -17,6 +17,9 @@ interface RecentPhotosDao {
     @Query("SELECT * FROM recentPhotos WHERE id = :id")
     suspend fun getPhotoById(id: String): PhotoEntity?
 
+    @Query("SELECT * FROM recentPhotos ORDER BY timestamp DESC")
+    suspend fun getAllPhotos(): List<PhotoEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(photo: PhotoEntity)
 

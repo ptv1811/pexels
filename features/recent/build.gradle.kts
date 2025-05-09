@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.vanluong.search"
+    namespace = "com.vanluong.recent"
     buildFeatures {
         dataBinding = true
         buildConfig = true

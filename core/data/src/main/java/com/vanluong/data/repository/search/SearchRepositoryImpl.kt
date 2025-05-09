@@ -29,12 +29,14 @@ class SearchRepositoryImpl @Inject constructor(
         perPage: Int
     ): Flow<Resource<NetworkSearchResult>> =
         flow {
-            pexelsDao.insertOrReplaceRecentSearchQuery(
-                RecentSearchQueryEntity(
-                    query = query,
-                    queriedDate = Clock.System.now()
+            if (query.isNotBlank()) {
+                pexelsDao.insertOrReplaceRecentSearchQuery(
+                    RecentSearchQueryEntity(
+                        query = query,
+                        queriedDate = Clock.System.now()
+                    )
                 )
-            )
+            }
 
             when (val response = pexelsClient.searchImages(query, page, perPage)) {
                 is Resource.Success -> {
@@ -84,5 +86,5 @@ class SearchRepositoryImpl @Inject constructor(
                 // No need to emit anything for loading state
             }
         }
-    }
+    }.flowOn(Dispatchers.IO)
 }
