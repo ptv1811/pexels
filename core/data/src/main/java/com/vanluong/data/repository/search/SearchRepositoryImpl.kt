@@ -53,7 +53,7 @@ class SearchRepositoryImpl @Inject constructor(
                 }
 
                 is Resource.ServerError -> {
-                    emit(Resource.ServerError(response.code, response.message))
+                    emit(response)
                 }
 
                 Resource.Loading -> {
@@ -79,7 +79,7 @@ class SearchRepositoryImpl @Inject constructor(
             }
 
             is Resource.ServerError -> {
-                emit(Resource.ServerError(response.code, response.message))
+                emit(response)
             }
 
             Resource.Loading -> {

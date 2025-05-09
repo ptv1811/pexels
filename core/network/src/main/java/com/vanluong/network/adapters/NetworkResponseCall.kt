@@ -1,6 +1,7 @@
 package com.vanluong.network.adapters
 
 import com.vanluong.model.Resource
+import com.vanluong.model.http.ApiErrorMapper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -8,6 +9,7 @@ import okhttp3.Request
 import okio.Timeout
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.HttpException
 import retrofit2.Response
 import retrofit2.awaitResponse
 
@@ -17,7 +19,8 @@ import retrofit2.awaitResponse
  */
 class NetworkResponseCall<T : Any>(
     private val delegate: Call<T>,
-    private val coroutineScope: CoroutineScope
+    private val coroutineScope: CoroutineScope,
+    private val errorMapper: ApiErrorMapper = DefaultApiErrorMapper()
 ) : Call<Resource<T>> {
 
     override fun enqueue(callback: Callback<Resource<T>>) {
@@ -27,12 +30,15 @@ class NetworkResponseCall<T : Any>(
                 val result = if (response.isSuccessful) {
                     Resource.Success(response.body()!!)
                 } else {
-                    Resource.ServerError(response.code(), response.message())
+                    Resource.ServerError(
+                        errorMapper.mapApiError(HttpException(response))
+                    )
                 }
                 callback.onResponse(this@NetworkResponseCall, Response.success(result))
 
             } catch (e: Exception) {
-                val result = Resource.DataError(e)
+                val mappedError = errorMapper.mapApiError(e)
+                val result = Resource.ServerError(mappedError)
                 callback.onResponse(this@NetworkResponseCall, Response.success(result))
             }
         }
@@ -49,21 +55,25 @@ class NetworkResponseCall<T : Any>(
                     } else {
                         Response.success(
                             Resource.ServerError(
-                                response.code(),
-                                "Empty response body"
+                                errorMapper.mapApiError(
+                                    Exception("Empty response body")
+                                )
                             )
                         )
                     }
                 } else {
                     Response.success(
                         Resource.ServerError(
-                            response.code(),
-                            response.message()
+                            errorMapper.mapApiError(
+                                HttpException(response)
+                            )
                         )
                     )
                 }
             } catch (e: Exception) {
-                Response.success(Resource.DataError(e))
+                val mappedError = errorMapper.mapApiError(e)
+                val result = Resource.ServerError(mappedError)
+                Response.success(result)
             }
         }
 
