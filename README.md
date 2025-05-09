@@ -164,4 +164,4 @@ control over animations, behavior, and integration with the app's UI/UX flow.
 Allow users to mark and store favorite photos for quicker access in the future.
 
 **Support for Dark Theme**  
-Provide full support for dark mode following Material You guidelines.
+Provide full support for dark mode following Material guidelines.
