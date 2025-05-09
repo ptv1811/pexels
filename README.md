@@ -67,9 +67,8 @@
 📦APK File
 --------------
 
-In case you can't build the project, here is
-the [Link](https://drive.google.com/drive/folders/1pJDnJhmilbcbeNv4MVovF74m14VzFk7q?usp=drive_link)
-to the APK file.
+In case you can't build the project, \
+here is the [Link](https://drive.google.com/drive/folders/1pJDnJhmilbcbeNv4MVovF74m14VzFk7q?usp=drive_link) to the APK file.
 
 🛠️ Tech Stack
 --------------
@@ -88,16 +87,13 @@ to the APK file.
 
     - **Database**: [Room](https://developer.android.com/jetpack/androidx/releases/room)
 
-    - **Asynchronous Programming
-      **: [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
+    - **Asynchronous Programming**: [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
 
     - **Reactive Streams**: [Flow](https://kotlinlang.org/docs/flow.html)
 
-    - **Pagingination
-      **: [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
+    - **Pagingination**: [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
 
-    - **Unit testing
-      **: [JUnit](https://junit.org/junit4/), [Mockito](https://site.mockito.org/), [Turbine](https://code.cash.app/flow-testing-with-turbine),
+    - **Unit testing**: [JUnit](https://junit.org/junit4/), [Mockito](https://site.mockito.org/), [Turbine](https://code.cash.app/flow-testing-with-turbine),
       etc
 
 🧠 Decision Making
