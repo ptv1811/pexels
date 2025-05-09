@@ -74,8 +74,7 @@ to the APK file.
 🛠️ Tech Stack
 --------------
 
-- 🧑‍💻 **Language
-  **: ![Kotlin](https://img.shields.io/badge/Kotlin-2.1.20-blue?logo=kotlin&logoColor=white)
+- 🧑‍💻 **Language**: ![Kotlin](https://img.shields.io/badge/Kotlin-2.1.20-blue?logo=kotlin&logoColor=white)
 
 - 🏗️ **Architecture**: Clean architecture - Single Activity - MVVM Design pattern - Multi-moduled
 
