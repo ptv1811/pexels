@@ -3,7 +3,7 @@
 
 🎯 **An Android application for searching image from Pexels**
 
-🎥 Demo (Running on Emulator due to lack of real devices)
+🎥 Demo
 --------------
 <img src="assets/pexels_demo.gif" height="400" />
 
@@ -56,7 +56,7 @@
    git clone https://github.com/ptv1811/pexels.git
    ```
 
-2. Create a `secrets.properties` file and fill in these options:
+2. Create a `secrets.properties` file at root directory and fill in these options:
     ```
     PEXELS_API_KEY="<Your Pexels API key>"
     BACKEND_URL="https://api.pexels.com/v1/"
@@ -67,15 +67,13 @@
 📦APK File
 --------------
 
-In case you can't build the project, here is
-the [Link](https://drive.google.com/drive/folders/1pJDnJhmilbcbeNv4MVovF74m14VzFk7q?usp=drive_link)
-to the APK file.
+In case you can't build the project, \
+here is the [Link](https://drive.google.com/drive/folders/1pJDnJhmilbcbeNv4MVovF74m14VzFk7q?usp=drive_link) to the APK file.
 
 🛠️ Tech Stack
 --------------
 
-- 🧑‍💻 **Language
-  **: ![Kotlin](https://img.shields.io/badge/Kotlin-2.1.20-blue?logo=kotlin&logoColor=white)
+- 🧑‍💻 **Language**: ![Kotlin](https://img.shields.io/badge/Kotlin-2.1.20-blue?logo=kotlin&logoColor=white)
 
 - 🏗️ **Architecture**: Clean architecture - Single Activity - MVVM Design pattern - Multi-moduled
 
@@ -89,16 +87,13 @@ to the APK file.
 
     - **Database**: [Room](https://developer.android.com/jetpack/androidx/releases/room)
 
-    - **Asynchronous Programming
-      **: [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
+    - **Asynchronous Programming**: [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
 
     - **Reactive Streams**: [Flow](https://kotlinlang.org/docs/flow.html)
 
-    - **Pagingination
-      **: [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
+    - **Pagingination**: [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
 
-    - **Unit testing
-      **: [JUnit](https://junit.org/junit4/), [Mockito](https://site.mockito.org/), [Turbine](https://code.cash.app/flow-testing-with-turbine),
+    - **Unit testing**: [JUnit](https://junit.org/junit4/), [Mockito](https://site.mockito.org/), [Turbine](https://code.cash.app/flow-testing-with-turbine),
       etc
 
 🧠 Decision Making
@@ -153,7 +148,7 @@ development of this application.
 ---------------
 Some planned or possible enhancements:
 
-**Support Build variants**
+**Support Build variants** \
 Due to time constraint, I don't have enough time to support build variance but it will be a good
 improvements in the future.
 
@@ -165,4 +160,4 @@ control over animations, behavior, and integration with the app's UI/UX flow.
 Allow users to mark and store favorite photos for quicker access in the future.
 
 **Support for Dark Theme**  
-Provide full support for dark mode following Material You guidelines.
+Provide full support for dark mode following Material guidelines.

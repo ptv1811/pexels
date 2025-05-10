@@ -6,6 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#000000"
         android:paddingVertical="12dp">
 
         <TextView
@@ -19,6 +20,20 @@
             app:layout_constraintBottom_toTopOf="@id/rvPhotos"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNoPhotos"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="16dp"
+            android:gravity="center"
+            android:text="@string/recently_viewed_no_photo"
+            android:textColor="@color/alphaWhite"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvShimmer"
@@ -39,6 +54,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="70dp"
             android:clipToPadding="false"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

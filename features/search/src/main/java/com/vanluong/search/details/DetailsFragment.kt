@@ -61,10 +61,16 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fragment_d
                             loadImageUsingGlide(photo.url)
 
                             val photographerString =
-                                getString(R.string.photographer_name, photo.photographer)
+                                getString(
+                                    com.vanluong.common.R.string.photographer_name,
+                                    photo.photographer
+                                )
                             tvPhotographer.text = photographerString.changeColorAtRange(
                                 photographerString.indexOf("Photographer") + "Photographer".length..photographerString.length
-                                        to resources.getColor(R.color.white, null)
+                                        to resources.getColor(
+                                    com.vanluong.common.R.color.white,
+                                    null
+                                )
                             )
                             tvAlt.text = photo.alt
                         }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryVariant">#3700B3</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="shimmerBase">#E0E0E0</color>
+    <color name="shimmerHighlight">#F5F5F5</color>
+
+    <color name="alphaWhite">#b3ffffff</color>
+</resources>

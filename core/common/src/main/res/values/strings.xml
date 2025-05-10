@@ -1,0 +1,13 @@
+<resources>
+    <!-- App module. -->
+    <string name="app_name">Pexels</string>
+    <string name="search">Search</string>
+    <string name="recent">Recent</string>
+
+    <string name="recently_viewed">Recently Viewed</string>
+    <string name="recently_viewed_no_photo">No Photo found!</string>
+
+    <string name="search_hint">Search Images</string>
+    <string name="photographer_name">Photographer %1$s</string>
+    <string name="recent_search">Recent Search</string>
+</resources>
