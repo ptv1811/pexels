@@ -151,6 +151,9 @@ Some planned or possible enhancements:
 **Improve image loading performance** \
 Currently the time to load each image is still high. Also when we scroll far away, when coming back to start of the image list, some images is already been cleared due to memory issue.
 
+**Improve reusability** \
+Some components such as the custom `PagingDataAdapter` can be implemented in a generic way to reuse between different modules.
+
 **Support Build variants** \
 Due to time constraint, I don't have enough time to support build variance but it will be a good
 improvements in the future.
