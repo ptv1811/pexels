@@ -3,7 +3,7 @@
 
 🎯 **An Android application for searching image from Pexels**
 
-🎥 Demo (Running on Emulator due to lack of real devices)
+🎥 Demo
 --------------
 <img src="assets/pexels_demo.gif" height="400" />
 

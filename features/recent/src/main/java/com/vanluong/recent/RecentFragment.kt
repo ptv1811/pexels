@@ -2,10 +2,12 @@ package com.vanluong.recent
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.vanluong.common.BaseFragment
 import com.vanluong.model.Resource
@@ -34,6 +36,14 @@ class RecentFragment : BaseFragment<FragmentRecentBinding>(R.layout.fragment_rec
                 setHasFixedSize(true)
                 adapter = recentPhotoAdapter
                 layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            }
+
+            recentPhotoAdapter.addLoadStateListener { loadState ->
+                if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached) {
+                    tvNoPhotos.isVisible = recentPhotoAdapter.itemCount < 1
+                    rvPhotos.isVisible = recentPhotoAdapter.itemCount > 0
+                }
+
             }
         }
     }
